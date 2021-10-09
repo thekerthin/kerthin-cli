@@ -1,6 +1,6 @@
 {
   "name": "@kerthin/cli",
-  "version": "0.0.2-0",
+  "version": "0.0.2-1",
   "main": "index.js",
   "repository": "https://github.com/thekerthin/kerthin-cli.git",
   "author": "sebastiandelaroche <sebastian.delaroche.dev@gmail.com>",
