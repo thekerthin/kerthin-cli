@@ -11,7 +11,6 @@ export abstract class Schematic {
 
   async execute(options: SchematicOption[]): Promise<void> {
     const command = this.buildCommandLine(options);
-    console.log('command', command);
     await this.runner.run(command);
   }
 

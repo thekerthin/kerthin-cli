@@ -18,15 +18,14 @@ export abstract class Runner {
     };
 
     return new Promise((resolve, reject): void => {
-      const process = spawn(this.binary, [...args], options);
+      const child = spawn(this.binary, [...args], options);
 
       if (collect) {
-        process.stdout.on('data', (data) =>
-          resolve(data.toString().replace(/\r\n|\n/, '')),
-        );
+        child.stdout?.on('data', (data) =>
+          resolve(data.toString().replace(/\r\n|\n/, '')));
       }
 
-      process.on('close', (code) => {
+      child.on('close', (code) => {
         if (code === 0) {
           resolve(null);
         } else {

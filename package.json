@@ -9,7 +9,10 @@
     "access": "public"
   },
   "bin": {
-    "kerthin": "dist/bin/kerthin.js"
+    "kn": "dist/bin/kerthin.js"
+  },
+  "engines": {
+    "node": "^12.20.0 || ^14.15.0 || ^16.10.0"
   },
   "contributors": [
     "Sebastian De La Roche <sebastian.delaroche.dev@gmail.com>"
@@ -30,6 +33,7 @@
     "release": "release-it"
   },
   "devDependencies": {
+    "@types/inquirer": "^8.2.0",
     "@types/node": "^16.10.3",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
@@ -40,10 +44,14 @@
   },
   "dependencies": {
     "@angular-devkit/schematics-cli": "^12.2.9",
-    "@kerthin/schematics": "0.0.2-1",
+    "@kerthin/schematics": "0.0.2-3",
     "@kerthin/utils": "^0.0.1-alpha.0",
     "chalk": "^4.1.2",
     "commander": "^8.2.0",
-    "inquirer": "^8.1.5"
+    "figlet": "^1.5.2",
+    "glob": "^7.2.0",
+    "inquirer": "^8.2.0",
+    "ora": "5.4.1",
+    "ts-morph": "^13.0.2"
   }
 }

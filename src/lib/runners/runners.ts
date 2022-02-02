@@ -1,3 +1,5 @@
 export enum Runners {
-    SCHEMATIC = 'schematic'
+    SCHEMATIC = 'schematic',
+    NPM = 'npm',
+    YARN = 'yarn',
 }
