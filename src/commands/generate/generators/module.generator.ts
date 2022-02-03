@@ -1,5 +1,6 @@
 import * as inquirer from 'inquirer';
 import * as ora from 'ora';
+import { isEmptyOrNil } from '@kerthin/utils';
 import { Project } from '../../../lib/config/project';
 import { RunnerFactory } from '../../../lib/runners/runner.factory';
 import { Runners } from '../../../lib/runners/runners';
@@ -35,6 +36,9 @@ export class ModuleGenerator extends Generator {
         name: 'name',
         message: 'What\'s the module name?',
         validate: (input) => {
+          if (isEmptyOrNil(input)) {
+            return 'The module name cannot be empty.';
+          }
           if (exitingModules.includes(input)) {
             return `The module '${input}' already exist.`;
           }

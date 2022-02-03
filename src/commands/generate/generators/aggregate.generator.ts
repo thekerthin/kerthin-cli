@@ -128,17 +128,20 @@ export class AggregateGenerator extends Generator {
     const entities = Project.getEntities(moduleName);
 
     sources.push(new inquirer.Separator(
-      `Value Object${valueObjects.length > 1 && 's'}`
+      `Value Object${valueObjects.length > 1 ? 's' : ''}`
     ));
     sources.push(
       ...valueObjects.map(entity => `(VO) ${entity}`)
     );
-    sources.push(new inquirer.Separator(
-      entities.length > 1 ? 'Entities' : 'Entity'
-    ));
-    sources.push(
-      ...entities.map(entity => `(E) ${entity}`)
-    );
+
+    if (entities.length > 0) {
+      sources.push(new inquirer.Separator(
+        entities.length > 1 ? 'Entities' : 'Entity'
+      ));
+      sources.push(
+        ...entities.map(entity => `(E) ${entity}`)
+      );
+    }
 
     return sources;
   }

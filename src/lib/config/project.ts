@@ -1,6 +1,6 @@
 import { isNotEmptyOrNil } from '@kerthin/utils';
 import * as glob from 'glob';
-import { basename, resolve, parse } from 'path';
+import { basename, resolve } from 'path';
 import { existsSync } from 'fs';
 import { Project as ProjectMorph } from 'ts-morph';
 import { KERTHIN_CONFIG_FILE_NAME, PROJECT_LOCAL_PATH } from '../ui/constants';
@@ -38,6 +38,17 @@ export class Project {
     const valueObjects = Project.getValueObjects(moduleName);
     if (valueObjects.length === 0) {
       throw new Error(MESSAGES.VALUE_OBJECT_NOT_FOUND`${moduleName}${context}`);
+    }
+  }
+
+  static isThereAtLeastOneEntityOrAggregate(
+    moduleName: string,
+    context: 'repository',
+  ): void {
+    const entities = Project.getEntities(moduleName);
+    const aggregates = Project.getAggregates(moduleName);
+    if (entities.length === 0 && aggregates.length === 0) {
+      throw new Error(MESSAGES.ENTITY_OR_AGGREGATE_NOT_FOUND`${moduleName}${context}`);
     }
   }
 
@@ -104,6 +115,44 @@ export class Project {
       .getSourceFiles()
       .filter((source) => isAggregate(source))
       .map((source) => getAggregateName(source));
+  }
+
+  static getRepositories(moduleName: string): string[] {
+    const project = new ProjectMorph();
+    project.addSourceFilesAtPaths(
+      `${PROJECT_LOCAL_PATH}/src/modules/${moduleName}/repositories/*Repository.ts`
+    );
+    const isRepository = (source) => isNotEmptyOrNil(
+      source
+        .getImportDeclaration('@kerthin/domain')
+        .getNamedImports()
+        .find(imports => imports.getFullText().trim() === 'Repository')
+    );
+    const getRepositoryName = (source) => source.getClasses()[0].getName();
+
+    return project
+      .getSourceFiles()
+      .filter((source) => isRepository(source))
+      .map((source) => getRepositoryName(source));
+  }
+
+  static getEvents(moduleName: string): string[] {
+    const project = new ProjectMorph();
+    project.addSourceFilesAtPaths(
+      `${PROJECT_LOCAL_PATH}/src/modules/${moduleName}/domain/events/*Event.ts`
+    );
+    const isEvent = (source) => isNotEmptyOrNil(
+      source
+        .getImportDeclaration('@kerthin/domain')
+        .getNamedImports()
+        .find(imports => imports.getFullText().trim() === 'Event')
+    );
+    const getEventName = (source) => source.getClasses()[0].getName();
+
+    return project
+      .getSourceFiles()
+      .filter((source) => isEvent(source))
+      .map((source) => getEventName(source));
   }
 
 }
