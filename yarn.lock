@@ -109,10 +109,10 @@
   resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-2.2.5.tgz#b32366c89b43c6f8cefbdefac778b9c828e3ba8c"
   integrity sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==
 
-"@kerthin/schematics@0.0.2-3":
-  version "0.0.2-3"
-  resolved "https://registry.yarnpkg.com/@kerthin/schematics/-/schematics-0.0.2-3.tgz#44a9dafe16b2459e3f032373031d2f8b6e2986c0"
-  integrity sha512-m1clPY6p2yZCg01lYQ6qtpUjHgojXfBzU/ie2XWT+Yu/JzbWbft9NFfZzHo9DPOV1z/WtIj1K6OCjrnqf+t7Vw==
+"@kerthin/schematics@0.0.2-4":
+  version "0.0.2-4"
+  resolved "https://registry.yarnpkg.com/@kerthin/schematics/-/schematics-0.0.2-4.tgz#b9829aa75a0589348bb49a3decf81436261d32ef"
+  integrity sha512-7GbRy5DZv/KhvzDjtlqi4ExwL5GGzevh1iGnL7eSZ34VR9ZN+smHsKvkuHrdsz2KQg2qDi0Yp4nE3mlnJUfDbg==
   dependencies:
     "@angular-devkit/core" "^12.2.9"
     "@angular-devkit/schematics" "^12.2.9"

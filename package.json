@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@angular-devkit/schematics-cli": "^12.2.9",
-    "@kerthin/schematics": "0.0.2-3",
+    "@kerthin/schematics": "0.0.2-4",
     "@kerthin/utils": "^0.0.1-alpha.0",
     "chalk": "^4.1.2",
     "commander": "^8.2.0",
