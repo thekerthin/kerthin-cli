@@ -5,5 +5,6 @@ export enum Targets {
   ValueObject = 'value_object',
   Event = 'event',
   UseCase = 'use_case',
-  Repository = 'repository'
+  Repository = 'repository',
+  // Resolver = 'resolver'
 }

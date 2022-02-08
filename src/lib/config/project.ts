@@ -3,6 +3,7 @@ import * as glob from 'glob';
 import { basename, resolve } from 'path';
 import { existsSync } from 'fs';
 import { Project as ProjectMorph } from 'ts-morph';
+import { classify } from '@angular-devkit/core/src/utils/strings';
 import { KERTHIN_CONFIG_FILE_NAME, PROJECT_LOCAL_PATH } from '../ui/constants';
 import { MESSAGES } from '../ui/messages';
 
@@ -153,6 +154,34 @@ export class Project {
       .getSourceFiles()
       .filter((source) => isEvent(source))
       .map((source) => getEventName(source));
+  }
+
+  static getEntityOrAggregateProps(moduleName: string, entityOrAggregate: string): string[] {
+    const project = new ProjectMorph();
+    project.addSourceFilesAtPaths(
+      `${PROJECT_LOCAL_PATH}/src/modules/${moduleName}/domain/*.ts`
+    );
+    const isEntityOrAggregate = (source) => isNotEmptyOrNil(
+      source
+        .getImportDeclaration('@kerthin/domain')
+        .getNamedImports()
+        .find(imports => ['DomainEntity', 'AggregateRoot'].includes(imports.getFullText().trim()))
+    );
+    const filterByName = (source) => {
+      const name = `${classify(entityOrAggregate)}.ts`;
+      return source.getBaseName() === name;
+    };
+
+    return project
+      .getSourceFiles()
+      .filter((source) => isEntityOrAggregate(source))
+      .find(filterByName)
+      .getClasses()[0]
+      .getProperties()
+      // .map(
+      //   (property) => `${property.getName()}:${property.getTypeNode().getText()}`
+      // );
+      .map((property) => property.getName());
   }
 
 }

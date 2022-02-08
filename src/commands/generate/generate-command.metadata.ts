@@ -5,15 +5,15 @@ export class GenerateCommandMetadata extends CommandMetadata {
 
     command = 'generate <target>';
 
-    description = `Generate a new target:
-                     * module
-                     * value_object
-                     * aggregate
-                     * entity
-                     * event
-                     * use_case
-                     * repository
-                     `;
+    description = `\n   Available targets:
+    * module
+    * value_object
+    * aggregate
+    * entity
+    * event
+    * use_case
+    * repository
+    `;
 
     options = [];
 }

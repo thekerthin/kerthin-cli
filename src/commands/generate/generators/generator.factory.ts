@@ -7,6 +7,7 @@ import { ModuleGenerator } from './module.generator';
 import { RepositoryGenerator } from './repository.generator';
 import { UseCaseGenerator } from './use-case.generator';
 import { ValueObjectGenerator } from './value-object.generator';
+// import { ResolverGenerator } from './resolver';
 
 export class GeneratorFactory {
 
@@ -26,6 +27,8 @@ export class GeneratorFactory {
         return new UseCaseGenerator();
       case Targets.ValueObject:
         return new ValueObjectGenerator();
+      // case Targets.Resolver:
+      //   return new ResolverGenerator();
       default:
         throw new Error('Incorrect Target.');
     }
